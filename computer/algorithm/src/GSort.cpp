@@ -1,6 +1,7 @@
 #include "GSort.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <QDebug>
 
 GSort::GSort()
 {
@@ -8,21 +9,19 @@ GSort::GSort()
 
 void GSort::print(int a[], int count)
 {
-    printf("\n--------begin--------\n");
+    qDebug()<<"\n--------begin--------\n";
     for(int i = 0; i < count; ++i)
     {
-        printf("%d",a[i]);
+        qDebug()<<a[i];
     }
-    printf("\n--------end--------\n");
+    qDebug()<<"\n--------end--------\n";
 }
 
 
 //--bad o(n^2)
-//--nomal o(nlogn)
 //--good o(n)
-void GSort::insertion_sort(int a[], int count)
+void GSort::insert_sort(int a[], int count)
 {
-    this->print(a, count);
     for(int i = 1; i < count; ++i)
     {
         int key = a[i];
@@ -40,6 +39,26 @@ void GSort::insertion_sort(int a[], int count)
                 break;
             }
         }
+
+        int j = i;
+        while(j > insertPos)
+        {
+            a[j] = a[j-1];
+            j--;
+        }
+
+        a[insertPos] = key;
+
+        this->print(a, count);
+    }
+}
+
+void GSort::binary_insert_sort(int a[], int count)
+{
+    for(int i = 1; i < count; ++i)
+    {
+        int key = a[i];
+        int insertPos = this->binary_insert(a, 0, i, key);
 
         int j = i;
         while(j > insertPos)
@@ -112,5 +131,63 @@ void GSort::merge_sort(int a[], int p, int r)
         this->merge(a, p, q, r);
     }
 }
+
+int GSort::binary_search(int a[], int p, int r, int value)
+{
+    int left = p;
+    int right = r;
+
+    while(left < right)
+    {
+        int middle = left + ((right - left)>>1);
+
+        if(value < a[middle])
+        {
+            right = middle;
+        }
+        else if(value > a[middle])
+        {
+            left = middle + 1;
+        }
+        else
+        {
+            return middle;
+        }
+    }
+
+    return -1;
+}
+
+int GSort::binary_insert(int a[], int p, int r, int value)
+{
+    int left = p;
+    int right = r;
+
+    while(left < right)
+    {
+        int middle = left + ((right - left)>>1);
+
+        if(value < a[middle])
+        {
+            right = middle;
+        }
+        else if(value > a[middle])
+        {
+            left = middle + 1;
+        }
+        else
+        {
+            return middle;
+        }
+    }
+
+    if( value > a[left] )
+    {
+        return left + 1;
+    }
+
+    return left;
+}
+
 
 

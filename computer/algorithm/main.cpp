@@ -1,11 +1,10 @@
-#include "mainwindow.h"
-#include <QApplication>
+#include <QCoreApplication>
+#include "src/GTest.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    
+    QCoreApplication a(argc, argv);
+    GTest test;
+    test.test();
     return a.exec();
 }

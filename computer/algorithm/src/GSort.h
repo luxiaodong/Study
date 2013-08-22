@@ -8,9 +8,13 @@ public:
     GSort();
 
 public:
-    void insertion_sort(int a[], int count);
+    void insert_sort(int a[], int count);
+    void binary_insert_sort(int a[], int count);
     void merge(int a[], int p, int q, int r);
     void merge_sort(int a[], int p, int r);
+
+    int binary_search(int a[], int p, int r, int value);
+    int binary_insert(int a[], int p, int r, int value);
 
 private:
     void print(int a[], int count);

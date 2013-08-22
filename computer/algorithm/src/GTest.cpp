@@ -1,5 +1,7 @@
 #include "GTest.h"
 #include "GSort.h"
+#include <stdio.h>
+#include <QDebug>
 
 GTest::GTest()
 {
@@ -7,7 +9,7 @@ GTest::GTest()
 
 void GTest::test()
 {
-    this->merge_sort();
+    this->binary_insert_sort();
 }
 
 void GTest::insert_sort()
@@ -15,7 +17,15 @@ void GTest::insert_sort()
     int a[] = {5,2,4,6,1,3,0,4,2,7,2,8,9,2,-1};
     //int a[] = {2,4,5,6,1,3};
     GSort sort;
-    sort.insertion_sort(a, 13);
+    sort.insert_sort(a, 13);
+}
+
+void GTest::binary_insert_sort()
+{
+    int a[] = {5,2,4,6,1,3,0,4,2,7,2,8,9,2,-1};
+    //int a[] = {2,4,5,6,1,3};
+    GSort sort;
+    sort.insert_sort(a, 13);
 }
 
 void GTest::merge()
@@ -30,4 +40,20 @@ void GTest::merge_sort()
     int a[] = {5,2,4,6,1,3,0,4,2,7,2,8,9,2,-1};
     GSort sort;
     sort.merge_sort(a,0,14);
+}
+
+void GTest::binary_search()
+{
+    int a[] = {1,2,3,4,6,7,8,9,13,16,19,21,23};
+    GSort sort;
+    int p = sort.binary_search(a, 0, 13, 0);
+    qDebug()<<p;
+}
+
+void GTest::binary_insert()
+{
+    int a[] = {1,2,3,4,6,7,8,9,13,16,19,21,23};
+    GSort sort;
+    int p = sort.binary_insert(a, 0, 13, 21);
+    qDebug()<<p;
 }

@@ -1,28 +1,28 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2013-08-21T10:57:32
+# Project created by QtCreator 2013-08-22T20:58:39
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       -= gui
 
-TARGET = algorithm
+TARGET = Demo
+CONFIG   += console
+CONFIG   -= app_bundle
+
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
+SOURCES += main.cpp \
     src/GTest.cpp \
     src/GSort.cpp \
     src/GGridCoord.cpp \
     src/GAStar.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS += \
     src/GTest.h \
     src/GSort.h \
     src/GGridCoord.h \
     src/GAStar.h
-
-FORMS    += mainwindow.ui
