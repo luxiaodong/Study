@@ -20,9 +20,9 @@ void GSort::print(int a[], int count)
 
 //--bad o(n^2)
 //--good o(n)
-void GSort::insert_sort(int a[], int count)
+void GSort::insert_sort(int a[], int r)
 {
-    for(int i = 1; i < count; ++i)
+    for(int i = 1; i < r; ++i)
     {
         int key = a[i];
         int insertPos = i;
@@ -49,13 +49,13 @@ void GSort::insert_sort(int a[], int count)
 
         a[insertPos] = key;
 
-        this->print(a, count);
+        this->print(a, r);
     }
 }
 
-void GSort::binary_insert_sort(int a[], int count)
+void GSort::binary_insert_sort(int a[], int r)
 {
-    for(int i = 1; i < count; ++i)
+    for(int i = 1; i < r; ++i)
     {
         int key = a[i];
         int insertPos = this->binary_insert(a, 0, i, key);
@@ -69,7 +69,7 @@ void GSort::binary_insert_sort(int a[], int count)
 
         a[insertPos] = key;
 
-        this->print(a, count);
+        this->print(a, r);
     }
 }
 
@@ -189,5 +189,55 @@ int GSort::binary_insert(int a[], int p, int r, int value)
     return left;
 }
 
+//o(logn)
+int GSort::reverse_pair_count(int a[], int r)
+{
+    int count = 0;
+    for(int i = 1; i < r; ++i)
+    {
+        int key = a[i];
+        int insertPos = this->binary_insert(a, 0, i, key);
+        count += i - insertPos;
+        int j = i;
+        while(j > insertPos)
+        {
+            a[j] = a[j-1];
+            j--;
+        }
 
+        a[insertPos] = key;
+
+        this->print(a, r);
+    }
+
+    return count;
+}
+
+bool GSort::is_contain_two_value_sum(int a[], int r, int sum)
+{
+    for(int i = 1; i < r; ++i)
+    {
+        int key = a[i];
+//question ?
+        if( this->binary_search(a, 0, i, sum - key) != -1)
+        {
+            return true;
+        }
+
+        int insertPos = this->binary_insert(a, 0, i, key);
+
+        int j = i;
+        while(j > insertPos)
+        {
+            a[j] = a[j-1];
+            j--;
+        }
+
+        a[insertPos] = key;
+
+        this->print(a, r);
+    }
+
+    return false;
+}
 

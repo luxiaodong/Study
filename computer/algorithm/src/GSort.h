@@ -8,13 +8,16 @@ public:
     GSort();
 
 public:
-    void insert_sort(int a[], int count);
-    void binary_insert_sort(int a[], int count);
+    void insert_sort(int a[], int r);
+    void binary_insert_sort(int a[], int r);
     void merge(int a[], int p, int q, int r);
     void merge_sort(int a[], int p, int r);
 
     int binary_search(int a[], int p, int r, int value);
     int binary_insert(int a[], int p, int r, int value);
+    int reverse_pair_count(int a[], int r);
+
+    bool is_contain_two_value_sum(int a[], int r, int sum);
 
 private:
     void print(int a[], int count);
