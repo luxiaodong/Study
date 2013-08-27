@@ -2,6 +2,8 @@ function [ output_args ] = city_main( input_args )
 %CITY_MAIN Summary of this function goes here
 %   Detailed explanation goes here
 
+cityPosition = load('cityPosition.txt');
+
 cityPath = importdata('cityPath.txt');
 s = size(cityPath);
 
@@ -9,8 +11,9 @@ s = size(cityPath);
 
 for i=1:s(1,1)
     row = cityPath(i,:);
-    x=[];
-    y=[];
+    citySrc = row(1,1);
+    x= cityPosition(citySrc,2);
+    y= cityPosition(citySrc,3);
     for j=3:s(1,2)
         value = row(1, j);
         if isnan(value)
@@ -23,13 +26,16 @@ for i=1:s(1,1)
             end
         end
     end
+    
+    cityDst = row(1,2);
+    
+    x = cat(2,x, cityPosition(cityDst,2));
+    y = cat(2,y, cityPosition(cityDst,3));
 
     singlePath(x, y);
     hold on;
 end
 
-cityPosition = load('cityPosition.txt');
 drawCity(cityPosition);
-   
 end
 

@@ -11,8 +11,8 @@ if rank > 3
     rank = 3;
 end
 i = [1:size];
-px = polyfit(i,x,rank);
-py = polyfit(i,y,rank);
+px = polyfit(i,x,rank)
+py = polyfit(i,y,rank)
 
 j = linspace(1,size,100);
 xx = polyval(px, j);
