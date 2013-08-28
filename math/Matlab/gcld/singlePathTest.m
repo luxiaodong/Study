@@ -27,9 +27,14 @@ cityDst = row(1,2);
 x = cat(2, x, cityPosition(cityDst,2));
 y = cat(2, y, cityPosition(cityDst,3));
 
-output_args = singlePath(x, y);
+polyRow = singlePath(x, y);
 hold on;
-drawCity(cityPosition);
+times = pathLength( polyRow );
+xx = polyval(polyRow(1,:), times);
+yy = polyval(polyRow(2,:), times);
+
+plot(xx,yy,'r*');
+
 
 end
 
