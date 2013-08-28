@@ -1,9 +1,9 @@
-function [ output_args ] = singlePathTest()
+function [times] = test()
 %SINGLEPATHTEST Summary of this function goes here
 %   Detailed explanation goes here
 
-cityPosition = load('cityPosition.txt');
-row = [130 163 3855 617 3902 619 3951 608 3978 594 4001 563 4013 531 4014 496];
+cityPosition = load('data_city.txt');
+row = [150 152 3394 2603 3446 2605 3542 2590 3643 2573 3726 2555 3793 2538];
 s = size(row);
 
 citySrc = row(1,1);
@@ -27,14 +27,11 @@ cityDst = row(1,2);
 x = cat(2, x, cityPosition(cityDst,2));
 y = cat(2, y, cityPosition(cityDst,3));
 
-polyRow = singlePath(x, y);
-hold on;
-times = pathLength( polyRow );
-xx = polyval(polyRow(1,:), times);
-yy = polyval(polyRow(2,:), times);
-
-plot(xx,yy,'r*');
-
+p = findPolyByPoints(x ,y);
+drawPathByPoly(p(1,:), p(2,:));
+drawPoints(x, y);
+times = calculatePolyCurveIsometricPoint(p(1,:), p(2,:));
+drawPathByPolyAndTimes(p(1,:), p(2,:), times);
 
 end
 

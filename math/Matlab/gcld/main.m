@@ -1,10 +1,10 @@
-function [ output_args ] = city_main()
+function [ output_args ] = main()
 %CITY_MAIN Summary of this function goes here
 %   Detailed explanation goes here
 
-cityPosition = load('cityPosition.txt');
+cityPosition = load('data_city.txt');
 
-cityPath = importdata('cityPath.txt');
+cityPath = importdata('data_path.txt');
 s = size(cityPath);
 
 output_args = [];
@@ -29,26 +29,24 @@ for i=1:s(1,1)
     
     cityDst = row(1,2);
     
-    x = cat(2,x, cityPosition(cityDst,2));
-    y = cat(2,y, cityPosition(cityDst,3));
+    x = cat(2, x, cityPosition(cityDst,2));
+    y = cat(2, y, cityPosition(cityDst,3));
 
-    p = singlePath(x, y);
-    
-    length = pathLength(p);
+    p = findPolyByPoints(x ,y);
     
     pSize = size(p);
     if pSize(1,2) < 4
         p =  cat(2, zeros(2, 4 - pSize(1,2)), p);
     end
     
+    drawPathByPoly(p(1,:), p(2,:));
+    drawPoints(x, y);
+
     p =  cat(2,[citySrc;cityDst], p);
-    p =  cat(2, p, length);
-    
     output_args = cat(1, output_args, p);
     
-    hold on;
 end
 
-drawCity(cityPosition);
+drawCity();
 end
 
