@@ -1,9 +1,9 @@
-function [times] = test()
+function [] = test()
 %SINGLEPATHTEST Summary of this function goes here
 %   Detailed explanation goes here
 
 cityPosition = load('data_city.txt');
-row = [150 152 3394 2603 3446 2605 3542 2590 3643 2573 3726 2555 3793 2538];
+row = [32 39 1162 483 1211 513 1242 559 1234 601 1214 621 1177 654 1145 686 1130 709 1130 744];
 s = size(row);
 
 citySrc = row(1,1);

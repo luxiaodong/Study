@@ -14,6 +14,7 @@ if rank > 3
 end
 k = [1:size];
 i = (k - 1)./(size - 1);
+
 px = polyfit(i,X,rank);
 py = polyfit(i,Y,rank);
 
