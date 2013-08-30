@@ -1,4 +1,4 @@
-function [ output_args ] = main()
+function [ ] = main()
 %CITY_MAIN Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -7,7 +7,8 @@ cityPosition = load('data_city.txt');
 cityPath = importdata('data_path.txt');
 s = size(cityPath);
 
-output_args = [];
+path_poly = [];
+times = [];
 
 for i=1:s(1,1)
     row = cityPath(i,:);
@@ -39,14 +40,19 @@ for i=1:s(1,1)
         p =  cat(2, zeros(2, 4 - pSize(1,2)), p);
     end
     
+    t = calculatePolyCurveIsometricPoint( p(1,:), p(2,:) );
+    t = cat(2, [citySrc, cityDst], t);
+    dlmwrite('timeTable.txt',t,'delimiter','\t','newline','pc','-append');
+    
     drawPathByPoly(p(1,:), p(2,:));
     drawPoints(x, y);
 
     p =  cat(2,[citySrc;cityDst], p);
-    output_args = cat(1, output_args, p);
-    
+    dlmwrite('polyTable.txt',p,'delimiter','\t','newline','pc','-append');
 end
 
 drawCity();
+set(gca,'DataAspectRatio',[1 1 1])
+
 end
 

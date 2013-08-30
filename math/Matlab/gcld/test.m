@@ -1,9 +1,10 @@
-function [] = test()
+function [times] = test()
 %SINGLEPATHTEST Summary of this function goes here
 %   Detailed explanation goes here
 
 cityPosition = load('data_city.txt');
-row = [32 39 1162 483 1211 513 1242 559 1234 601 1214 621 1177 654 1145 686 1130 709 1130 744];
+%row = [150 152 3394 2603 3446 2605 3542 2590 3643 2573 3726 2555 3793 2538];
+row = [147 152 3573 2362 3584 2400 3619 2448 3672 2482 3719 2504 3782 2505];
 s = size(row);
 
 citySrc = row(1,1);
@@ -32,6 +33,6 @@ drawPathByPoly(p(1,:), p(2,:));
 drawPoints(x, y);
 times = calculatePolyCurveIsometricPoint(p(1,:), p(2,:));
 drawPathByPolyAndTimes(p(1,:), p(2,:), times);
-
+set(gca,'DataAspectRatio',[1 1 1])
 end
 
