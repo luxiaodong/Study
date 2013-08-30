@@ -6,9 +6,5 @@ xx = polyval(px, t);
 yy = polyval(py, t);
 
 plot(xx,yy,'r*');
-px
-py
-xx
-yy
 end
 

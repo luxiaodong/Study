@@ -7,8 +7,8 @@ cityPosition = load('data_city.txt');
 cityPath = importdata('data_path.txt');
 s = size(cityPath);
 
-path_poly = [];
-times = [];
+% path_poly = [];
+% times = [];
 
 for i=1:s(1,1)
     row = cityPath(i,:);
@@ -37,7 +37,9 @@ for i=1:s(1,1)
     
     pSize = size(p);
     if pSize(1,2) < 4
-        p =  cat(2, zeros(2, 4 - pSize(1,2)), p);
+         XY = bezier(x, y);
+         p = findPolyByPoints(XY(1,:), XY(2,:));
+%         p =  cat(2, zeros(2, 4 - pSize(1,2)), p);
     end
     
     t = calculatePolyCurveIsometricPoint( p(1,:), p(2,:) );
