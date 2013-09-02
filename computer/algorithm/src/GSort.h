@@ -19,6 +19,14 @@ public:
 
     bool is_contain_two_value_sum(int a[], int r, int sum);
 
+    //heap
+    heap_heapify(int a[], int p, int r);
+    heap_build(int a[], int r);
+    heap_sort(int a[], int r);
+    heap_extract_max(int a[], int r);
+    heap_insert(int a[], key, int r);
+    heap_delete(int a[], int p, int r);
+
 private:
     void print(int a[], int count);
 };

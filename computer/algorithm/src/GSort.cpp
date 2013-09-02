@@ -241,3 +241,40 @@ bool GSort::is_contain_two_value_sum(int a[], int r, int sum)
     return false;
 }
 
+//parent = (i-1)/2
+//left = i*2 + 1;
+//right = i*2 + 2;
+
+bool GSort::heap_heapify(int a[], int p, int r)
+{
+    int largest = p;
+    int l = 2*p + 1;
+    int r = 2*p + 2;
+
+    if(l < r && a[l] > a[largest])
+    {
+        largest = l;
+    }
+
+    if(r < r)
+
+
+
+
+
+}
+
+bool GSort::heap_build(int a[], int r)
+{}
+
+bool GSort::heap_sort(int a[], int r)
+{}
+
+bool GSort::heap_extract_max(int a[], int r)
+{}
+
+bool GSort::heap_insert(int a[], key, int r)
+{}
+
+bool GSort::heap_delete(int a[], int p, int r)
+{}
