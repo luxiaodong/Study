@@ -245,36 +245,82 @@ bool GSort::is_contain_two_value_sum(int a[], int r, int sum)
 //left = i*2 + 1;
 //right = i*2 + 2;
 
-bool GSort::heap_heapify(int a[], int p, int r)
+void GSort::heap_heapify(int a[], int p, int r)
 {
     int largest = p;
-    int l = 2*p + 1;
-    int r = 2*p + 2;
+    int left = 2*p + 1;
+    int right = 2*p + 2;
 
-    if(l < r && a[l] > a[largest])
+    if(left < r && a[left] > a[largest])
     {
-        largest = l;
+        largest = left;
     }
 
-    if(r < r)
+    if(right < r && a[right] > a[largest])
+    {
+        largest = right;
+    }
 
-
-
-
-
+    if(largest != p)
+    {
+        int temp = a[p];
+        a[p] = a[largest];
+        a[largest] = temp;
+        this->heap_heapify(a, largest, r);
+    }
 }
 
-bool GSort::heap_build(int a[], int r)
-{}
+void GSort::heap_build(int a[], int r)
+{
+    for(int i = (r-1)/2; i >= 0; i--)
+    {
+        this->heap_heapify(a, i, r);
+    }
+}
 
-bool GSort::heap_sort(int a[], int r)
-{}
+void GSort::heap_sort(int a[], int r)
+{
+    this->heap_build(a, r);
 
-bool GSort::heap_extract_max(int a[], int r)
-{}
+    for(int i = r-1; i >= 0; --i)
+    {
+        int temp = a[i];
+        a[i] = a[0];
+        a[0] = temp;
+        this->heap_heapify(a, 0, i);
+    }
+}
 
-bool GSort::heap_insert(int a[], key, int r)
-{}
+void GSort::heap_delete(int a[],int p, int r)
+{
+    if(p != r-1)
+    {
+        int temp = a[p];
+        a[p] = a[r-1];
+        a[r-1] = temp;
 
-bool GSort::heap_delete(int a[], int p, int r)
-{}
+        while(1)
+        {
+            if(p == 0)
+            {
+                break;
+            }
+
+            int parent = (p-1)/2;
+
+            if( a[parent] >= a[p] )
+            {
+                break;
+            }
+
+            temp = a[p];
+            a[p] = a[parent];
+            a[parent] = temp;
+            p = parent;
+        }
+
+        this->heap_heapify(a, p, r - 1);
+    }
+}
+
+

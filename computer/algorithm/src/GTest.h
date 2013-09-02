@@ -20,6 +20,7 @@ private:
     void binary_search();
     void reverse_pair_count();
     void is_contain_two_value_sum();
+    void heap_sort();
 };
 
 #endif // GTEST_H

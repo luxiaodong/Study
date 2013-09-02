@@ -9,7 +9,7 @@ GTest::GTest()
 
 void GTest::test()
 {
-    this->is_contain_two_value_sum();
+    this->heap_sort();
 }
 
 void GTest::insert_sort()
@@ -74,3 +74,10 @@ void GTest::is_contain_two_value_sum()
     qDebug()<<b;
 }
 
+void GTest::heap_sort()
+{
+    int a[] = {4,1,3,2,16,9,10,14,8,7};
+    GSort sort;
+    sort.heap_sort(a, 10);
+    sort.print(a, 10);
+}
