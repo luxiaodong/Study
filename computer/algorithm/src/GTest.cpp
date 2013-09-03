@@ -78,6 +78,8 @@ void GTest::heap_sort()
 {
     int a[] = {4,1,3,2,16,9,10,14,8,7};
     GSort sort;
-    sort.heap_sort(a, 10);
+    sort.heap_build(a, 10);
+    sort.print(a, 10);
+    sort.heap_delete(a, 0, 10);
     sort.print(a, 10);
 }

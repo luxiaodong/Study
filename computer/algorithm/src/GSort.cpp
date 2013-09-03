@@ -298,28 +298,27 @@ void GSort::heap_delete(int a[],int p, int r)
         int temp = a[p];
         a[p] = a[r-1];
         a[r-1] = temp;
+        int parent = (p-1)/2;
 
-        while(1)
+        if(p > 0 && a[parent] < a[p])
         {
-            if(p == 0)
+            while(1)
             {
-                break;
+                temp = a[p];
+                a[p] = a[parent];
+                a[parent] = temp;
+                p = parent;
+
+                if(p == 0 || a[parent] >= a[p])
+                {
+                    break;
+                }
             }
-
-            int parent = (p-1)/2;
-
-            if( a[parent] >= a[p] )
-            {
-                break;
-            }
-
-            temp = a[p];
-            a[p] = a[parent];
-            a[parent] = temp;
-            p = parent;
         }
-
-        this->heap_heapify(a, p, r - 1);
+        else
+        {
+            this->heap_heapify(a, p, r-1);
+        }
     }
 }
 
