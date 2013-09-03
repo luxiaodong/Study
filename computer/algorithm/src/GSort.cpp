@@ -324,7 +324,7 @@ void GSort::heap_delete(int a[],int p, int r)
 
 int GSort::partition(int a[], int p, int r)
 {
-    int key = a[p];
+    int key = a[p];//一个随机化版本是取其中的数，而不是第一个，保证平均值为nlgn
     int i = 0;
     int j = r - 1;
 
