@@ -25,6 +25,10 @@ public:
     void heap_sort(int a[], int r);
     void heap_delete(int a[],int p, int r);
 
+    //quick
+    int partition(int a[], int p, int r);
+    void quick_sort(int a[], int p, int r);
+
     void print(int a[], int count);
 };
 

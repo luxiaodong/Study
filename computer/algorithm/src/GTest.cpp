@@ -9,7 +9,7 @@ GTest::GTest()
 
 void GTest::test()
 {
-    this->heap_sort();
+    this->quick_sort();
 }
 
 void GTest::insert_sort()
@@ -81,5 +81,13 @@ void GTest::heap_sort()
     sort.heap_build(a, 10);
     sort.print(a, 10);
     sort.heap_delete(a, 0, 10);
+    sort.print(a, 10);
+}
+
+void GTest::quick_sort()
+{
+    int a[] = {4,1,3,2,16,9,10,14,8,7};
+    GSort sort;
+    sort.partition(a, 5, 10);
     sort.print(a, 10);
 }

@@ -322,4 +322,46 @@ void GSort::heap_delete(int a[],int p, int r)
     }
 }
 
+int GSort::partition(int a[], int p, int r)
+{
+    int key = a[p];
+    int i = 0;
+    int j = r - 1;
+
+    while(1)
+    {
+        while(a[j] > key)
+        {
+            j--;
+        }
+
+        while(a[i] < key)
+        {
+            i++;
+        }
+
+        if(i < j)
+        {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return j;
+}
+
+void GSort::quick_sort(int a[], int p, int r)
+{
+    if(p < r)
+    {
+        int q = this->partition(a,p,r);
+        this->quick_sort(a,p,q);
+        this->quick_sort(a,q+1,r);
+    }
+}
 
