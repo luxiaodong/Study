@@ -22,6 +22,7 @@ private:
     void is_contain_two_value_sum();
     void heap_sort();
     void quick_sort();
+    void count_sort();
 };
 
 #endif // GTEST_H

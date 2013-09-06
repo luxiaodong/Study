@@ -9,7 +9,7 @@ GTest::GTest()
 
 void GTest::test()
 {
-    this->quick_sort();
+    this->count_sort();
 }
 
 void GTest::insert_sort()
@@ -91,3 +91,14 @@ void GTest::quick_sort()
     sort.partition(a, 5, 10);
     sort.print(a, 10);
 }
+
+void GTest::count_sort()
+{
+    int a[] = {4,1,3,2,16,9,10,14,8,7};
+    int b[] = {0,0,0,0,0,0,0,0,0,0};
+    GSort sort;
+    sort.count_sort(a, b, 10, 17);
+    sort.print(b, 10);
+}
+
+

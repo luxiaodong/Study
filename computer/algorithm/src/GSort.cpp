@@ -12,7 +12,7 @@ void GSort::print(int a[], int count)
     qDebug()<<"\n--------begin--------\n";
     for(int i = 0; i < count; ++i)
     {
-        qDebug()<<a[i];
+        qDebug()<<i<<"---->"<<a[i];
     }
     qDebug()<<"\n--------end--------\n";
 }
@@ -365,3 +365,33 @@ void GSort::quick_sort(int a[], int p, int r)
     }
 }
 
+//a<--in
+//b-->out
+void GSort::count_sort(int a[], int b[], int r, int k)
+{
+    int* c = (int*)malloc(sizeof(int)*(k));
+    for(int i = 0; i < k; ++i)
+    {
+        c[i] = 0;
+    }
+
+    //记录等于i的元素的个数
+    for(int i = 0; i < r; ++i)
+    {
+        c[ a[i] ]++;
+    }
+
+    //记录小于等于i的元素个数
+    for(int i = 1; i < k; ++i)
+    {
+        c[i] += c[i-1];
+    }
+
+    for(int i = r-1; i >= 0; --i)
+    {
+        b[ c[ a[i] ] - 1 ] = a[i];
+        c[ a[i] ]--;
+    }
+
+    free(c);
+}

@@ -29,6 +29,9 @@ public:
     int partition(int a[], int p, int r);
     void quick_sort(int a[], int p, int r);
 
+    //count 计数, 适合0 ~ k -1内的排序
+    void count_sort(int a[], int b[], int r, int k);
+
     void print(int a[], int count);
 };
 
