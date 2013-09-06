@@ -324,7 +324,7 @@ void GSort::heap_delete(int a[],int p, int r)
 
 int GSort::partition(int a[], int p, int r)
 {
-    int key = a[p];//一个随机化版本是取其中的数，而不是第一个，保证平均值为nlgn
+    int key = a[p];
     int i = 0;
     int j = r - 1;
 
@@ -353,6 +353,16 @@ int GSort::partition(int a[], int p, int r)
     }
 
     return j;
+}
+
+//一个随机化版本是取其中的数，而不是第一个，保证平均值为nlgn
+int GSort::random_partition(int a[], int p, int r)
+{
+    int q = rand()%(r-p) + p;
+    int temp = a[p];
+    a[p] = a[q];
+    a[q] = temp;
+    return this->partition(a,p,r);
 }
 
 void GSort::quick_sort(int a[], int p, int r)
@@ -395,3 +405,48 @@ void GSort::count_sort(int a[], int b[], int r, int k)
 
     free(c);
 }
+
+int GSort::random_select(int a[], int p, int r, int i)
+{
+    qDebug()<<p<<r<<i;
+    if(p == r - 1)
+    {
+        return a[p];
+    }
+
+    int q = this->random_partition(a, p, r);
+    int k = q - p;
+
+    if(i <= k)
+    {
+        return this->random_select(a, p, q, i);
+    }
+
+    return this->random_select(a, q, r, i - k);
+}
+
+int GSort::mid_number_in_two_order_array(int a[], int ap, int ar, int b[], int bp, int br)
+{
+    //可以使用合并排序，然后再找中位数
+    //这里折半查找更快,只适合数组等长
+    //考虑在折半时候奇偶数导致的非对称
+    if( ap == ar )
+    {
+        return a[ap];
+    }
+
+    int mid_a = ap + (ar-ap)/2;
+    int mid_b = bp + (br-bp)/2;
+
+    if(a[mid_a] < b[mid_b])
+    {
+        return this->mid_number_in_two_order_array(a, mid_a, ar, b, bp, mid_b);
+    }
+    else if(a[mid_a] > b[mid_b])
+    {
+        return this->mid_number_in_two_order_array(a, ap, mid_a, b, mid_b, br);
+    }
+
+    return a[mid_a];
+}
+

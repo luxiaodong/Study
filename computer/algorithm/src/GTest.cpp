@@ -9,7 +9,7 @@ GTest::GTest()
 
 void GTest::test()
 {
-    this->count_sort();
+    this->random_select();
 }
 
 void GTest::insert_sort()
@@ -101,4 +101,17 @@ void GTest::count_sort()
     sort.print(b, 10);
 }
 
+void GTest::random_select()
+{
+    int a[] = {4,1,3,2,16,9,10,14,8,7};
+    GSort sort;
+    qDebug()<<sort.random_select(a,0,10,7);
+    sort.print(a,10);
+}
 
+void GTest::mid_number_in_two_array()
+{
+    int a[] = {1,2,5,7,8,10};
+    int b[] = {1,4,6,7,9,10};
+    GSort sort;
+}

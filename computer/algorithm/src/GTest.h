@@ -23,6 +23,8 @@ private:
     void heap_sort();
     void quick_sort();
     void count_sort();
+    void random_select();
+    void mid_number_in_two_array();
 };
 
 #endif // GTEST_H
