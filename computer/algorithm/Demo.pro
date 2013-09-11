@@ -19,10 +19,12 @@ SOURCES += main.cpp \
     src/GTest.cpp \
     src/GSort.cpp \
     src/GGridCoord.cpp \
-    src/GAStar.cpp
+    src/GAStar.cpp \
+    src/GTree.cpp
 
 HEADERS += \
     src/GTest.h \
     src/GSort.h \
     src/GGridCoord.h \
-    src/GAStar.h
+    src/GAStar.h \
+    src/GTree.h
