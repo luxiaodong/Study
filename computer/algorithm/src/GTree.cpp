@@ -8,6 +8,11 @@ GTreeNode::GTreeNode()
     m_right = 0;
 }
 
+void GBinarySearchTree::inorder_tree_walk()
+{
+    return this->inorder_tree_walk(this->m_root);
+}
+
 void GBinarySearchTree::inorder_tree_walk(GTreeNode* root)
 {
     if(root != 0)
@@ -16,6 +21,11 @@ void GBinarySearchTree::inorder_tree_walk(GTreeNode* root)
         qDebug()<<root->m_value;
         this->inorder_tree_walk(root->m_right);
     }
+}
+
+GTreeNode* GBinarySearchTree::tree_seach(int value)
+{
+    return this->tree_seach(this->m_root, value);
 }
 
 GTreeNode* GBinarySearchTree::tree_seach(GTreeNode* root, int value)
@@ -52,13 +62,18 @@ GTreeNode* GBinarySearchTree::iterative_tree_seach(GTreeNode* root, int value)
         {
             current = current->m_left;
         }
-        else if(value > current->m_right)
+        else if(value > current->m_value)
         {
             current = current->m_right;
         }
     }
 
     return 0;
+}
+
+GTreeNode* GBinarySearchTree::tree_minimum()
+{
+    return this->tree_minimum(this->m_root);
 }
 
 GTreeNode* GBinarySearchTree::tree_minimum(GTreeNode* root)
@@ -76,6 +91,12 @@ GTreeNode* GBinarySearchTree::tree_minimum(GTreeNode* root)
 
     return 0;
 }
+
+GTreeNode* GBinarySearchTree::tree_maximum()
+{
+    return this->tree_maximum(this->m_root);
+}
+
 
 GTreeNode* GBinarySearchTree::tree_maximum(GTreeNode* root)
 {
