@@ -9,7 +9,7 @@ GTest::GTest()
 
 void GTest::test()
 {
-    this->random_select();
+    this->tree_delete();
 }
 
 void GTest::insert_sort()
@@ -115,3 +115,109 @@ void GTest::mid_number_in_two_array()
     int b[] = {1,4,6,7,9,10};
     GSort sort;
 }
+
+void GTest::tree_successor()
+{
+    GBinarySearchTree tree;
+    tree.tree_insert( new GTreeNode(15) );
+    tree.tree_insert( new GTreeNode(6) );
+    tree.tree_insert( new GTreeNode(18) );
+    GTreeNode* node = new GTreeNode(16);
+    tree.tree_insert(node);
+    tree.tree_insert( new GTreeNode(3) );
+    tree.tree_insert( new GTreeNode(7) );
+    tree.tree_insert( new GTreeNode(17) );
+    tree.tree_insert( new GTreeNode(20) );
+    tree.tree_insert( new GTreeNode(2) );
+    tree.tree_insert( new GTreeNode(4) );
+    tree.tree_insert( new GTreeNode(13) );
+    tree.tree_insert( new GTreeNode(9) );
+
+    GTreeNode* last = tree.tree_successor(node);
+    if(last == 0)
+    {
+        qDebug()<<"not find";
+    }
+    else
+    {
+        qDebug()<<last->m_value;
+    }
+}
+
+void GTest::tree_predecessor()
+{
+    GBinarySearchTree tree;
+    tree.tree_insert( new GTreeNode(15) );
+    tree.tree_insert( new GTreeNode(6) );
+    tree.tree_insert( new GTreeNode(18) );
+    GTreeNode* node = new GTreeNode(16);
+    tree.tree_insert(node);
+    tree.tree_insert( new GTreeNode(3) );
+    tree.tree_insert( new GTreeNode(7) );
+    tree.tree_insert( new GTreeNode(17) );
+    tree.tree_insert( new GTreeNode(20) );
+    tree.tree_insert( new GTreeNode(2) );
+    tree.tree_insert( new GTreeNode(4) );
+    tree.tree_insert( new GTreeNode(13) );
+    tree.tree_insert( new GTreeNode(9) );
+
+    GTreeNode* last = tree.tree_predecessor(node);
+    if(last == 0)
+    {
+        qDebug()<<"not find";
+    }
+    else
+    {
+        qDebug()<<last->m_value;
+    }
+}
+
+void GTest::tree_seach()
+{}
+
+void GTest::tree_insert()
+{
+    GBinarySearchTree tree;
+    tree.tree_insert( new GTreeNode(15) );
+    tree.tree_insert( new GTreeNode(6) );
+    tree.tree_insert( new GTreeNode(18) );
+    tree.tree_insert( new GTreeNode(3) );
+    tree.tree_insert( new GTreeNode(7) );
+    tree.tree_insert( new GTreeNode(17) );
+    tree.tree_insert( new GTreeNode(20) );
+    tree.tree_insert( new GTreeNode(2) );
+    tree.tree_insert( new GTreeNode(4) );
+    tree.tree_insert( new GTreeNode(13) );
+    tree.tree_insert( new GTreeNode(9) );
+
+    tree.inorder_tree_walk();
+}
+
+void GTest::tree_delete()
+{
+    GBinarySearchTree tree;
+    GTreeNode* node = new GTreeNode(15);
+    tree.tree_insert( node );
+    tree.tree_insert( new GTreeNode(6) );
+    tree.tree_insert( new GTreeNode(18) );
+    tree.tree_insert( new GTreeNode(3) );
+    tree.tree_insert( new GTreeNode(7) );
+    tree.tree_insert( new GTreeNode(17) );
+    tree.tree_insert( new GTreeNode(20) );
+    tree.tree_insert( new GTreeNode(2) );
+    tree.tree_insert( new GTreeNode(4) );
+    tree.tree_insert( new GTreeNode(13) );
+    tree.tree_insert( new GTreeNode(9) );
+    tree.tree_insert( new GTreeNode(14) );
+
+    if(tree.tree_delete(node) == true)
+    {
+        qDebug()<<"ok";
+        tree.inorder_tree_walk();
+    }
+    else
+    {
+        qDebug()<<"failed";
+    }
+}
+

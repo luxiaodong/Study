@@ -6,6 +6,20 @@ GTreeNode::GTreeNode()
     m_parent = 0;
     m_left = 0;
     m_right = 0;
+    m_value = 0;
+}
+
+GTreeNode::GTreeNode(int value)
+{
+    m_value = value;
+    m_parent = 0;
+    m_left = 0;
+    m_right = 0;
+}
+
+GBinarySearchTree::GBinarySearchTree()
+{
+    m_root = 0;
 }
 
 void GBinarySearchTree::inorder_tree_walk()
@@ -186,20 +200,20 @@ GTreeNode* GBinarySearchTree::tree_predecessor(GTreeNode* node)
     return 0;
 }
 
-bool GBinarySearchTree::tree_insert(GTreeNode* root, GTreeNode* node)
+bool GBinarySearchTree::tree_insert(GTreeNode* node)
 {
     if (node == 0)
     {
         return false;
     }
 
-    if(root == 0)
+    if(m_root == 0)
     {
-        root = node;
+        m_root = node;
         return true;
     }
 
-    GTreeNode* parent = root;
+    GTreeNode* parent = m_root;
     while(1)
     {
         GTreeNode* son = 0;
@@ -232,9 +246,9 @@ bool GBinarySearchTree::tree_insert(GTreeNode* root, GTreeNode* node)
     return false;
 }
 
-bool GBinarySearchTree::tree_delete(GTreeNode* root, GTreeNode* node)
+bool GBinarySearchTree::tree_delete(GTreeNode* node)
 {
-    if(root == 0 || node == 0)
+    if(node == 0)
     {
         return false;
     }
@@ -242,49 +256,121 @@ bool GBinarySearchTree::tree_delete(GTreeNode* root, GTreeNode* node)
     //check node is in root ? or return false
     if(node->m_left == 0 && node->m_right == 0)
     {
-        GTreeNode* parent = node->m_parent;
-        if(node->m_parent == parent->m_left)
+        if(node == m_root)
         {
-            parent->m_left = 0;
+            m_root = 0;
         }
         else
         {
-            parent->m_right = 0;
+            GTreeNode* parent = node->m_parent;
+            if(node == parent->m_left)
+            {
+                parent->m_left = 0;
+            }
+            else
+            {
+                parent->m_right = 0;
+            }
         }
     }
     else if(node->m_left == 0 || node->m_right == 0)
     {
-        GTreeNode* parent = node->m_parent;
-        if(node->m_left == 0)
+        if(node == m_root)
         {
-            if(parent->m_left == node)
+            if(node->m_left == 0)
             {
-                parent->m_left = node->m_right;
+                m_root = node->m_right;
             }
             else
             {
-                parent->m_right = node->m_right;
+                m_root = node->m_left;
             }
         }
         else
         {
-            if(parent->m_left == node)
+            GTreeNode* parent = node->m_parent;
+            if(node->m_left == 0)
             {
-                parent->m_left = node->m_left;
+                if(parent->m_left == node)
+                {
+                    parent->m_left = node->m_right;
+                }
+                else
+                {
+                    parent->m_right = node->m_right;
+                }
             }
             else
             {
-                parent->m_right = node->m_left;
+                if(parent->m_left == node)
+                {
+                    parent->m_left = node->m_left;
+                }
+                else
+                {
+                    parent->m_right = node->m_left;
+                }
             }
         }
     }
     else if(node->m_left != 0 && node->m_right != 0)
     {
-        //need think. why need root
+        GTreeNode* next = this->tree_successor(node);
+        //swap value, not swap point
+        int value = next->m_value;
+        next->m_value = node->m_value;
+        node->m_value = value;
+        //this->tree_swap(next, node);
 
+//        if(node == m_root)
+//        {
+//            m_root = node;
+//        }
+
+        return this->tree_delete(next);
     }
 
-    return false;
+    return true;
 }
 
+void GBinarySearchTree::tree_swap(GTreeNode* a, GTreeNode* b)
+{
+    GTreeNode* temp_parent = a->m_parent;
+    GTreeNode* temp_left = a->m_left;
+    GTreeNode* temp_right = a->m_right;
+    int temp_value = a->m_value;
 
+    a->m_parent = b->m_parent;
+    a->m_left = b->m_left;
+    a->m_right = b->m_right;
+    a->m_value = b->m_value;
+
+    b->m_parent = temp_parent;
+    b->m_left = temp_left;
+    b->m_right = temp_right;
+    b->m_value = temp_value;
+
+    if(a->m_parent != 0)
+    {
+        if(a == a->m_parent->m_left)
+        {
+            a->m_parent->m_left = b;
+        }
+        else
+        {
+            a->m_parent->m_right = b;
+        }
+    }
+
+    if(b->m_parent != 0)
+    {
+        if(b == b->m_parent->m_left)
+        {
+            b->m_parent->m_left = a;
+        }
+        else
+        {
+            b->m_parent->m_right = a;
+        }
+    }
+}

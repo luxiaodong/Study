@@ -2,6 +2,7 @@
 #define GTEST_H
 
 #include "GSort.h"
+#include "GTree.h"
 
 class GTest
 {
@@ -25,6 +26,13 @@ private:
     void count_sort();
     void random_select();
     void mid_number_in_two_array();
+
+private:
+    void tree_successor();
+    void tree_predecessor();
+    void tree_seach();
+    void tree_insert();
+    void tree_delete();
 };
 
 #endif // GTEST_H
