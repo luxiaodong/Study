@@ -374,3 +374,13 @@ void GBinarySearchTree::tree_swap(GTreeNode* a, GTreeNode* b)
         }
     }
 }
+
+
+void GBinarySearchTree::left_rotate(GTreeNode* node)
+{
+
+}
+
+void GBinarySearchTree::right_rotate(GTreeNode* node)
+{}
+

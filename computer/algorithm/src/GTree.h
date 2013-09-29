@@ -12,6 +12,7 @@ public:
     GTreeNode* m_left;
     GTreeNode* m_right;
     int m_value;
+    int m_color; //0 - black, 1 - red.
 };
 
 class GBinarySearchTree
@@ -27,8 +28,6 @@ public:
     GTreeNode* tree_predecessor(GTreeNode* node);
     bool tree_insert(GTreeNode* node);
     bool tree_delete(GTreeNode* node);
-//    bool tree_insert(GTreeNode* node);
-//    bool tree_delete(GTreeNode* node);
 private:
     void inorder_tree_walk(GTreeNode* root);
     GTreeNode* tree_seach(GTreeNode* root, int value);
@@ -43,5 +42,11 @@ public:
     GTreeNode*  m_root;
 };
 
+class GRedBlackTree : public GBinarySearchTree
+{
+public:
+    void left_rotate(GTreeNode* node);
+    void right_rotate(GTreeNode* node);
+};
 
 #endif // GTREE_H
