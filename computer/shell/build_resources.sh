@@ -36,21 +36,21 @@ function processingFile()
 
     if [ "${sourcePath##*.}" = "lua" ]; then
         ${cmdToolsDir}/luajit -b $sourcePath $targetPath
-    elif [ "${sourcePath##*.}" = "mp3" ]; then
-        cp $sourcePath ${targetPath}.mp3
-    elif [ "${sourcePath##*.}" = "jpg" ]; then
-        ${cmdToolsDir}/ImageMagick/bin/convert -quality 25 -strip $sourcePath $targetPath
-    elif [ "${sourcePath##*.}" = "png" ]; then
-        local temp=${buildDir}/temp.png
-        cp $sourcePath $temp
-        ${cmdToolsDir}/pngquant --force --ordered --ext .png --quality=40-90 $temp
-        mv $temp $targetPath
-    elif [ "${sourcePath##*.}" = "plist" ]; then
-        cp $sourcePath $targetPath
-    elif [ "${sourcePath##*.}" = "ccz" ]; then
-        cp $sourcePath $targetPath
-    else #if [ "${sourcePath##*.}" = "so" ]; then
-        echo $sourcePath
+    #elif [ "${sourcePath##*.}" = "mp3" ]; then
+    #    cp $sourcePath ${targetPath}.mp3
+    #elif [ "${sourcePath##*.}" = "jpg" ]; then
+    #    ${cmdToolsDir}/ImageMagick/bin/convert -quality 25 -strip $sourcePath $targetPath
+    #elif [ "${sourcePath##*.}" = "png" ]; then
+    #    local temp=${buildDir}/temp.png
+    #    cp $sourcePath $temp
+    #    ${cmdToolsDir}/pngquant --force --ordered --ext .png --quality=40-90 $temp
+    #    mv $temp $targetPath
+    #elif [ "${sourcePath##*.}" = "plist" ]; then
+    #    cp $sourcePath $targetPath
+    #elif [ "${sourcePath##*.}" = "ccz" ]; then
+    #    cp $sourcePath $targetPath
+    #else #if [ "${sourcePath##*.}" = "so" ]; then
+    #    echo $sourcePath
     fi
 
     if [ -f $targetPath ]; then

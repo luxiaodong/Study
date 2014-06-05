@@ -1,8 +1,7 @@
 scriptDir=$(cd "$(dirname "$0")"; pwd)
-releaseDir=$(cd ${scriptDir}/../channel_project; pwd)
 androidSDK=$SDK_ROOT
-androidANT="/Users/luxiaodong/Program/Android/apache-ant-1.9.3"
-versionStr="v1.5.11.0"
+androidANT=$ANT_ROOT
+versionStr="unknow"
 
 function copy_res()
 {
@@ -11,8 +10,25 @@ function copy_res()
         rm -rf ${projectDir}/assets
     fi
 
+    if [ ! -d ${scriptDir}/Resources ]; then
+        echo 'error: no floder Resources'
+        exit 0
+    fi
+
+    if [ ! -f ${scriptDir}/Resources/version.lua ]; then
+        echo 'error: no version.lua'
+        exit 0
+    fi
+
+    versionStr=$(grep 'sys_version.game' ${scriptDir}/Resources/version.lua | awk -F '"' '{print $2}' )
+    echo "current version is "${versionStr}
+    if [ "$versionStr"x = "unknow"x ]; then
+        echo 'unknow version'
+        exit 0
+    fi
+
     mkdir ${projectDir}/assets
-    for file in ${scriptDir}/assets/*
+    for file in ${scriptDir}/Resources/*
     do
         if [ -d "$file" ]; then
             cp -rf "$file" ${projectDir}/assets
@@ -36,6 +52,11 @@ function copy_res()
     done
 
     #copy libcocos2dlua.so
+    if [ ! -f ${scriptDir}/libcocos2dlua.so ]; then
+        echo 'error: no file libcocos2dlua.so'
+        exit 0
+    fi
+
     if [ ! -d ${projectDir}/libs ]; then
         mkdir ${projectDir}/libs
     fi
@@ -48,7 +69,7 @@ function copy_res()
         rm ${projectDir}/libs/armeabi/libcocos2dlua.so
     fi
 
-    cp ${scriptDir}/libs/armeabi/libcocos2dlua.so ${projectDir}/libs/armeabi/libcocos2dlua.so
+    cp ${scriptDir}/libcocos2dlua.so ${projectDir}/libs/armeabi/libcocos2dlua.so
 }
 
 function build_config()
@@ -60,7 +81,7 @@ function build_config()
     cp ${scriptDir}/ant.properties ${projectDir}/ant.properties
     timeStr=$(date "+%Y%m%d%H%M")
     channelName=${projectDir##*.}
-    outPut="out.final.file=../android_build_key/gcld_${timeStr}_${versionStr}_${channelName}.apk"
+    outPut="out.final.file=../common_build/apk/gcld_${timeStr}_${versionStr}_${channelName}.apk"
     echo $outPut>>${projectDir}/ant.properties
 }
 
@@ -79,7 +100,7 @@ function build_android()
     echo "love is over."
 }
 
-if [ $# == 0 ]; then
+if [ $# = 0 ]; then
     echo "miss project dir"
     exit 1
 fi
